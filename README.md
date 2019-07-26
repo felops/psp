@@ -7,6 +7,32 @@ Versão super simplificada de um Payment Service Provider (PSP).
 npm install && npm start
 ```
 
+## Executando testes
+
+```bash
+npm test
+```
+
+## Endpoints da API
+
+```bash
+GET /payables
+GET /transactions
+POST /transactions
+```
+
+Parâmetros para `POST /transaction`:
+
+| Parâmetro         | Obrigatório | Valor                         |
+| ----------------  | ----------- | ----------------------------- |
+| value             | sim         | float                         |
+| description       | sim         | string                        |
+| method_payment    | sim         | `credit_card` ou `debit_card` |
+| card_number       | sim         | string                        |
+| card_holder_name  | sim         | string                        |
+| card_expiry_date  | sim         | YYYY-MM                       |
+| card_cvv          | sim         | string                        |
+
 ## Contexto
 
 Em sua essência um PSP tem duas funções muito importantes:
