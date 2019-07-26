@@ -1,7 +1,11 @@
 var chai = require('chai')
 var should = chai.should()
+var chaiHTTP = require('chai-http')
 var Payable = require('../domains/Payable')
 
+chai.use(chaiHTTP)
+
+var url = 'http://localhost:3000'
 
 describe('Payables', () => {
   describe('#Create payable object', () => {
@@ -28,6 +32,20 @@ describe('Payables', () => {
         payable.payment_date.should.be.eql(payment_date)
         payable.fee.should.be.equal(fee)
         payable.receivable_value.should.be.equal(value * (100 - fee) / 100)
+    })
+  })
+
+  describe('#Get payable balance', () => {
+    it('should return the balance', () => {
+      chai
+        .request(url)
+        .get('/payables')
+        .end((err, res) => {
+          res.should.be.json
+          res.should.have.status(200)
+          res.text.should.include.any.string('available')
+          res.text.should.include.any.string('waiting_funds')
+        })
     })
   })
 })

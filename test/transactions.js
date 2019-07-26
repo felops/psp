@@ -8,7 +8,7 @@ var url = 'http://localhost:3000',
     card = '4111111111111111'
 
 describe('Transactions', () => {
-  describe('#post - creditCard', () => {
+  describe('#Post transactions', () => {
     it('should create a error for transaction without value', () => {
       chai
         .request(url)
@@ -176,7 +176,7 @@ describe('Transactions', () => {
     })
   })
 
-  describe('#get', () => {
+  describe('#Get transactions', () => {
     it('should return all transactions', () => {
       chai
         .request(url)
