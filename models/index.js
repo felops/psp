@@ -1,4 +1,4 @@
-var Sequelize = require("sequelize");
+var Sequelize = require("sequelize")
 
 var sequelize = new Sequelize('psp', 'psp', '2e(2jHmu{N',
   {
