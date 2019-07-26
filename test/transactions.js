@@ -18,7 +18,7 @@ describe('Transactions', () => {
           method_payment: 'credit_card',
           card_number: card,
           card_holder_name: 'Felipe Lopes',
-          card_expiry_date: new Date,
+          card_expiry_date: '2019-10',
           card_cvv: 251
         })
         .end((err, res) => {
@@ -36,7 +36,7 @@ describe('Transactions', () => {
           method_payment: 'credit_card',
           card_number: card,
           card_holder_name: 'Felipe Lopes',
-          card_expiry_date: new Date,
+          card_expiry_date: '2019-10',
           card_cvv: 251
         })
         .end((err, res) => {
@@ -54,7 +54,7 @@ describe('Transactions', () => {
           description: 'Smartband XYZ 3.0',
           card_number: card,
           card_holder_name: 'Felipe Lopes',
-          card_expiry_date: new Date,
+          card_expiry_date: '2019-10',
           card_cvv: 251
         })
         .end((err, res) => {
@@ -72,7 +72,7 @@ describe('Transactions', () => {
           description: 'Smartband XYZ 3.0',
           method_payment: 'credit_card',
           card_holder_name: 'Felipe Lopes',
-          card_expiry_date: new Date,
+          card_expiry_date: '2019-10',
           card_cvv: 251
         })
         .end((err, res) => {
@@ -90,7 +90,7 @@ describe('Transactions', () => {
           description: 'Smartband XYZ 3.0',
           method_payment: 'credit_card',
           card_number: card,
-          card_expiry_date: new Date,
+          card_expiry_date: '2019-10',
           card_cvv: 251
         })
         .end((err, res) => {
@@ -117,6 +117,25 @@ describe('Transactions', () => {
         })
     })
 
+    it('should create a error for transaction with invalid date for card_expiry_date', () => {
+      chai
+        .request(url)
+        .post('/transactions')
+        .send({
+          value: 56.98,
+          description: 'Smartband XYZ 3.0',
+          method_payment: 'credit_card',
+          card_number: card,
+          card_holder_name: 'Felipe Lopes',
+          card_expiry_date: 'teste',
+          card_cvv: 251
+        })
+        .end((err, res) => {
+          res.should.have.status(422)
+          res.text.should.include.any.string('"param":"card_expiry_date"')
+        })
+    })
+
     it('should create a error for transaction without card_cvv', () => {
       chai
         .request(url)
@@ -127,7 +146,7 @@ describe('Transactions', () => {
           method_payment: 'credit_card',
           card_number: card,
           card_holder_name: 'Felipe Lopes',
-          card_expiry_date: new Date
+          card_expiry_date: '2019-10'
         })
         .end((err, res) => {
           res.should.have.status(422)
@@ -145,7 +164,7 @@ describe('Transactions', () => {
           method_payment: 'credit_card',
           card_number: card,
           card_holder_name: 'Felipe Lopes',
-          card_expiry_date: new Date,
+          card_expiry_date: '2019-10',
           card_cvv: 251
         })
         .end((err, res) => {
@@ -165,7 +184,7 @@ describe('Transactions', () => {
           method_payment: 'debit_card',
           card_number: card,
           card_holder_name: 'Felipe Lopes',
-          card_expiry_date: new Date,
+          card_expiry_date: '2019-10',
           card_cvv: 251
         })
         .end((err, res) => {

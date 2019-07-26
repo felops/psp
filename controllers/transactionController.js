@@ -1,6 +1,7 @@
 var express = require('express')
 var models  = require('../models')
 var Payable = require('../domains/Payable')
+var moment = require('moment')
 
 const { check, validationResult } = require('express-validator/check')
 
@@ -38,6 +39,6 @@ exports.validate = [
   check('method_payment').isIn(['credit_card', 'debit_card']),
   check('card_number').isCreditCard(),
   check('card_holder_name').isString().isLength({ min: 5 }),
-  check('card_expiry_date').exists(),
-  check('card_cvv').exists().isLength({ min: 3 })
+  check('card_expiry_date').custom(val => moment(val, 'YYYY-MM', true).isValid()).withMessage('Invalid date'),
+  check('card_cvv').isLength({ min: 3 })
 ]
