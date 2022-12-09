@@ -8,7 +8,7 @@
     "test": "mocha"
   },
   "dependencies": {
-    "express": "~4.16.1",
+    "express": "~4.18.2",
     "express-validator": "^6.1.1",
     "moment": "^2.24.0",
     "mysql2": "^1.6.5",
